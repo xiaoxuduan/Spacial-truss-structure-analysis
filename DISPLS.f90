@@ -1,10 +1,10 @@
-SUBROUTINE DISPLS(NP, NE, NF, NPF, NM, NN, IT, FTOOL,
+SUBROUTINE DISPLS(NP, NE, NF, NPF, NM, NN, IT, FTOOL,&
 & DIST, AE, NAE, X, Y, Z, PP, FF, SG, SM)
     implicit REAL*8(A-H, O-Z)
     IMPLICIT INTEGER*4(I-N)
 
-    DIMENSION IT(NF, NP), DIST(NPF), FTOOL(NPF), T(2,6),
-    & TT(6,2), AE(2,NM), ME(2,NE), NAE(NE), UE(6), U(2),
+    DIMENSION IT(NF, NP), DIST(NPF), FTOOL(NPF), T(2,6),&
+    & TT(6,2), AE(2,NM), ME(2,NE), NAE(NE), UE(6), U(2),&
     & AKE(2,2), FEI(2), FE(6), FF(NPF), PP(NPF), SG(NE), SM(NE)
     SG=0; SM=0; FF=0
     DO I=1, NP
