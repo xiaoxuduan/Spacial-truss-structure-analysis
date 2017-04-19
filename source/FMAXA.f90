@@ -1,14 +1,14 @@
 SUBROUTINE FMAXA(NN1, NE, LMT, MAXA, NWK, NPF, NDF)
     implicit REAL*8(A-H, O-Z)
     IMPLICIT INTEGER*4(I-N)
-
-    DIMENSION MAXA(NPF), LMT(NDF, NET)
+! what NET?, change net to ne, P25.
+    DIMENSION MAXA(NPF), LMT(NDF, NE)
     MAXA=0; NWK=0
     MAXA(I)=1
     DO I=2, NN1
         IP=I-1
         IG=IP
-        DO IE=, NE
+        DO IE=1, NE
             DO J=1, NDF
                 IF(LMT(J,IE).EQ.IP) THEN
                     DO K=1,NDF

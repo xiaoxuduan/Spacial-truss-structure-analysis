@@ -19,7 +19,7 @@ SUBROUTINE CONKB(NP, NE, NM, NWK, ME, X, Y, Z, AE, NAE,&
             DO 220 J=1,6
                 NI=LMT(I,IE)
                 NJ=LMT(J,IE)
-                IF((NJ-NNI).GE.0.ADN.NI*NJ.GT.0) THEN
+                IF((NJ-NNI).GE.0.And.NI*NJ.GT.0) THEN
                     IJ=MAXA(NJ)+NJ-NI
                     CKK(IJ)=CKK(IJ)+TAK(I,J)
                 ENDIF

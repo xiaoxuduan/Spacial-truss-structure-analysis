@@ -25,6 +25,8 @@ SUBROUTINE RESOLVE(A, V, MAXA, NN, NWK ,NNM)
         KL=MAXA(N)+1
         KU=MAXA(N+1)-1
         IF(KU-KL) 500,510,510
+510     K=N
+        DO 520 KK=KL,KU
         K=K-1
 520     V(K,IP)=V(K,IP)-A(KK)*V(N,IP)
 500     N=N-1

@@ -6,7 +6,9 @@ SUBROUTINE DISPLS(NP, NE, NF, NPF, NM, NN, IT, FTOOL,&
     DIMENSION IT(NF, NP), DIST(NPF), FTOOL(NPF), T(2,6),&
     & TT(6,2), AE(2,NM), ME(2,NE), NAE(NE), UE(6), U(2),&
     & AKE(2,2), FEI(2), FE(6), FF(NPF), PP(NPF), SG(NE), SM(NE)
-    SG=0; SM=0; FF=0
+    ! WHAT?? SG??
+    !SG=0; 
+    SM=0; FF=0
     DO I=1, NP
         DO J=1, NF
             LAB=IT(J,I)
@@ -25,18 +27,19 @@ SUBROUTINE DISPLS(NP, NE, NF, NPF, NM, NN, IT, FTOOL,&
         ENDDO
         CALL FT(IE, NP, NE, X, Y, Z, ME, T)
         CALL FKE(NP, NE, NM, IE, X, Y, Z, ME, NAE, AE, AKE)
-        U=T*UE
-        FE1=AKE*U
+        ! IF U=T*UE,CHANGE TO FUNCTION MATMUL()
+        U=MATMUL(T,UE)
+        FEI=MATMUL(AKE,U)
         CALL MAT(2, 6, T, TT)
-        FE=TT*FE1
+        FE=MATMUL(TT,FEI)
         DO J=1, NF
             FF(NF*(N1-1)+J)=FF(NF*(N1-1)+J)+FE(J)
             FF(NF*(N2-1)+J)=FF(NF*(N2-1)+J)+FE(NF+J)
         ENDDO
         ISW=NAE(IE)
-        AAE(2.ISW)
-        SG(IE)=FE1(2)
-        SM(IE)=FE1(2)/AO
+        AO=AE(2,ISW)
+        SG(IE)=FEI(2)
+        SM(IE)=FEI(2)/AO
     ENDDO
     DO I=1, NPF
         FF(I)=FF(I)-PP(I)

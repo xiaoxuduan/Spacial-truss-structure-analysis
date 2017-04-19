@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectCreator="Intel Fortran" Keyword="Console Application" Version="11.0" ProjectIdGuid="{E34F2990-EDDE-4D21-990A-4DEB7F1CAEC4}">
+	<Platforms>
+		<Platform Name="Win32"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" WarnInterfaces="true" Traceback="true" BoundsCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32">
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" RuntimeLibrary="rtMultiThreadedDLL"/>
+				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" SubSystem="subSystemConsole"/>
+				<Tool Name="VFResourceCompilerTool"/>
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
+		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
+		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
+		<File RelativePath="..\..\source\CLOSEF.f90"/>
+		<File RelativePath="..\..\source\CONKB.f90"/>
+		<File RelativePath="..\..\source\DATAIN.f90"/>
+		<File RelativePath="..\..\source\DATAOUT.f90"/>
+		<File RelativePath="..\..\source\DISPLS.f90"/>
+		<File RelativePath="..\..\source\FKE.f90"/>
+		<File RelativePath="..\..\source\FLMT.f90"/>
+		<File RelativePath="..\..\source\FMAXA.f90"/>
+		<File RelativePath="..\..\source\FT.f90"/>
+		<File RelativePath="..\..\source\LDLT.f90"/>
+		<File RelativePath="..\..\source\MAT.f90"/>
+		<File RelativePath="..\..\source\MKFORCE.f90"/>
+		<File RelativePath="..\..\source\OPENF.f90"/>
+		<File RelativePath="..\..\source\RESOLVE.f90"/>
+		<File RelativePath="..\..\source\TRUSS.f90"/></Filter></Files>
+	<Globals/></VisualStudioProject>
