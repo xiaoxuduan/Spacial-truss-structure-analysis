@@ -7,7 +7,7 @@ SUBROUTINE DISPLS(NP, NE, NF, NPF, NM, NN, IT, FTOOL,&
     & TT(6,2), AE(2,NM), ME(2,NE), NAE(NE), UE(6), U(2),&
     & AKE(2,2), FEI(2), FE(6), FF(NPF), PP(NPF), SG(NE), SM(NE)
     ! WHAT?? SG??
-    !SG=0; 
+    SG=0;
     SM=0; FF=0
     DO I=1, NP
         DO J=1, NF

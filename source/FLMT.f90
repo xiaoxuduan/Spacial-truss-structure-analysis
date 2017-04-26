@@ -31,7 +31,7 @@ SUBROUTINE FLMT(NP, NE, NN, NN1, NR, RR, ND, NF, NDF, ME, IT, LMT)
         DO I=1, ND
             NI=ME(I,IE)
             DO J=1,NF
-            ! NI??
+            ! NI, SEE higher;
                 LMT((I-1)*NF+J, IE)=IT(J,NI)
             ENDDO
         ENDDO

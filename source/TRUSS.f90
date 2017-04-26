@@ -29,4 +29,5 @@ program TRUSS
     & A(IDIST+1), A(IAE+1), IA(INAE+1), A(IX+1), A(IY+1), A(IZ+1),&
     & A(IPP+1), A(IFF+1), A(ISG+1), A(ISM+1))
     CALL CLOSF
-end program TRUSS
+end
+

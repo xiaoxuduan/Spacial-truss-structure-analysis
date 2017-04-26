@@ -27,19 +27,19 @@
 		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
-		<File RelativePath="..\..\source\CLOSEF.f90"/>
-		<File RelativePath="..\..\source\CONKB.f90"/>
-		<File RelativePath="..\..\source\DATAIN.f90"/>
-		<File RelativePath="..\..\source\DATAOUT.f90"/>
-		<File RelativePath="..\..\source\DISPLS.f90"/>
-		<File RelativePath="..\..\source\FKE.f90"/>
-		<File RelativePath="..\..\source\FLMT.f90"/>
-		<File RelativePath="..\..\source\FMAXA.f90"/>
-		<File RelativePath="..\..\source\FT.f90"/>
-		<File RelativePath="..\..\source\LDLT.f90"/>
-		<File RelativePath="..\..\source\MAT.f90"/>
-		<File RelativePath="..\..\source\MKFORCE.f90"/>
-		<File RelativePath="..\..\source\OPENF.f90"/>
-		<File RelativePath="..\..\source\RESOLVE.f90"/>
-		<File RelativePath="..\..\source\TRUSS.f90"/></Filter></Files>
+		<File RelativePath="..\..\sourceFromT\CLOSEF.f90"/>
+		<File RelativePath="..\..\sourceFromT\CONKB.f90"/>
+		<File RelativePath="..\..\sourceFromT\DATAIN.f90"/>
+		<File RelativePath="..\..\sourceFromT\DATAOUT.f90"/>
+		<File RelativePath="..\..\sourceFromT\DISPLS.f90"/>
+		<File RelativePath="..\..\sourceFromT\FKE.f90"/>
+		<File RelativePath="..\..\sourceFromT\FLMT.f90"/>
+		<File RelativePath="..\..\sourceFromT\FMAXA.f90"/>
+		<File RelativePath="..\..\sourceFromT\FT.f90"/>
+		<File RelativePath="..\..\sourceFromT\LDLT.f90"/>
+		<File RelativePath="..\..\sourceFromT\MAT.f90"/>
+		<File RelativePath="..\..\sourceFromT\MKFORCE.f90"/>
+		<File RelativePath="..\..\sourceFromT\OPENF.f90"/>
+		<File RelativePath="..\..\sourceFromT\RESOLVE.f90"/>
+		<File RelativePath="..\..\sourceFromT\TRUSS.f90"/></Filter></Files>
 	<Globals/></VisualStudioProject>

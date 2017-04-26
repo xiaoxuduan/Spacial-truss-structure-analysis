@@ -1,4 +1,4 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Wed Apr 19 17:07:45 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Wed Apr 26 14:00:02 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE DATAOUT__genmod
