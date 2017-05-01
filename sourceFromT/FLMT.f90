@@ -8,8 +8,8 @@ SUBROUTINE  FLMT(NP,NE,NN,NN1,NR,RR,ND,NF,NDF,ME,IT,LMT)
   DO  I=1,NP
    C=0
    DO  K=1,NR
-KR=RR(1,K)
-IF(KR.EQ.I)  C=RR(2,K)
+    KR=RR(1,K)
+    IF(KR.EQ.I)  C=RR(2,K)
    ENDDO
    NC=C
    C=C-NC

@@ -5,6 +5,7 @@
         IMPLICIT INTEGER*4 (I-N)
         COMMON /AT/A(18000000)
         COMMON /IAT/IA(2000000)
+        ! read data from file 1, so file 1 should be created firstly with data needed in;
         READ(1,*)NP,NE,NM,NR,NCF
         WRITE(2,701)NP,NE,NM,NR,NCF
   701   FORMAT(//1X,'###OUTPUT OF ORIGINAL INPUT INFORMATION###'&
@@ -36,6 +37,8 @@
         IPP=IFF+NPF
         ISG=IPP+NPF
         ISM=ISG+NE
+        ! Below read should be change all!
+        ! chaghe to A(start: end), remove I;
         READ(1,*)(A(IX+I),A(IY+I),A(IZ+I),I=1,NP)
         WRITE(2,714)(I,A(IX+I),A(IY+I),A(IZ+I),I=1,NT)
   714   FORMAT(//5X,'GENERATED JOINT COORDINATES DATA'&
