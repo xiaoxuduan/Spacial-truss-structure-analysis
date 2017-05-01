@@ -1,7 +1,7 @@
 SUBROUTINE  FLMT(NP,NE,NN,NN1,NR,RR,ND,NF,NDF,ME,IT,LMT)
   IMPLICIT  REAL*8(A-H,O-Z)
   IMPLICIT  INTEGER*4(I-N)
-C  This program  forms  the  joint&element  numbering  matrix  IT&LMT
+!C  This program  forms  the  joint&element  numbering  matrix  IT&LMT
   DIMENSION  IT(NF,NP),LMT(NDF,NE),ME(ND,NE),RR(2,NR)
   NN=0;NN1=0;IT=0;LMT=0
   N=0

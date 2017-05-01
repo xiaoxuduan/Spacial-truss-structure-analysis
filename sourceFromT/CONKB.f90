@@ -12,7 +12,7 @@
          CALL FT(IE,NP,NE,X,Y,Z,ME,T)
          CALL MAT(2,6,T,TT)
          ! alter
-         TAK=matmul(matmul(TT*AKE)*T)
+         TAK=matmul(matmul(TT,AKE),T)
          DO 220 I=1,6
          DO 220 J=1,6
           NI=LMT(I,IE)

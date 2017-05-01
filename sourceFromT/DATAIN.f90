@@ -13,7 +13,7 @@
      &   /5X,'Number of material property groups    PROPERTY TYPES=',I5&
      &   /5X,'Number of restrained joints                 RESTRAINTS=',I5&
      &   /5X,'Number of concentrative forced joints             NCF=',I5)
-C--------------FORM POINTER----------------------------------
+!C--------------FORM POINTER----------------------------------
         NF=3
         ND=2
         NDF=ND*NF
@@ -42,9 +42,9 @@ C--------------FORM POINTER----------------------------------
      &        /1X,'  JOINT  ',15X,'X',13X,'Y',13X,'Z'&
      &  /(4X,I5,3X,3(2X,E12.6)))
         READ(1,*)(A(IAE+2*(I-1)+1), A(IAE+2*(I-1)+2),I=1,NM)
-        READ(1,*)(IA(IME+2*(I-1)+1),IA(IME+2*(I-1)+2,IA(INAE+I),I=1,NE)
+        READ(1,*)(IA(IME+2*(I-1)+1),IA(IME+2*(I-1)+2),IA(INAE+I),I=1,NE)
         WRITE(2,606)(I,A(IAE+2*(I-1)+1), A(IAE+2*(I-1)+2),I=1,NM)
-        WRITE(2,607)(I,IA(IME+2*(I-1)+1),IA(IME+2*(I-1)+2,IA(INAE+I),I=1,NE)
+        WRITE(2,607)(I,IA(IME+2*(I-1)+1),IA(IME+2*(I-1)+2),IA(INAE+I),I=1,NE)
 606     FORMAT(/5X,'ELEMENT MATERAIL PROPERTIES DATA'&
 &         /2X,'NO.',10X,' E',10X,'Ax'&
      &         /(2X,I3,2(1X,E11.5)))
@@ -58,7 +58,8 @@ C--------------FORM POINTER----------------------------------
      &         /(2X,F7.0,10X,F9.3))
         READ(1,*)((A(IPF+4*(I-1)+J),J=1,4),I=1,NCF)
         WRITE(2,609)((A(IPF+4*(I-1)+J),J=1,4),I=1,NCF)
-608     FORMAT(/5X,'CONCENTRATIVE FORCED JOINTS DATA'&
+        ! alter 608 to 609
+609     FORMAT(/5X,'CONCENTRATIVE FORCED JOINTS DATA'&
 &         /2X,'  JOINT',10X,'Fx', 10X,'Fy',10X,'Fz'&
      &         /(2X,F7.0,3(1X,E11.5)))
         RETURN

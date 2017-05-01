@@ -43,10 +43,14 @@ SUBROUTINE LDLT(A,MAXA,NN,ISH,IOUT,NWK,NNM)
 320      WRITE(IOUT,2000) N,A(KN)
          STOP
 200     CONTINUE
-        RETURN
-2001      FORMAT(//' Stop-stiffness matrix not positive    + definite',//,'nonpositive pivot for equation',
-+ I4,//,' pivot =',E20.10)
-2011    FORMAT(//,' Stop-sturm sequence check failed 
-+ because of multiplier growth for column 
-+ number',I4,//,  ' Multiplier = ',E20.8)
+        !RETURN
+        ! alter 2001 to 2000
+2000      FORMAT(//' Stop-stiffness matrix not positive    + definite',//,'nonpositive pivot for equation',&
+&I4,//,' pivot =',E20.10)
+!alter 2011 to 2010
+2010    FORMAT(//,' Stop-sturm sequence check failed &
+& because of multiplier growth for column &
+& number',I4,//,  ' Multiplier = ',E20.8)
+
+    return
       END

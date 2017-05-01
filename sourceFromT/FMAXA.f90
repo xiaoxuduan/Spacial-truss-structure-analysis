@@ -1,8 +1,9 @@
 SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF)
-C This program forms the MDE address matrix MAXA of [K]
+!C This program forms the MDE address matrix MAXA of [K]
 IMPLICIT REAL*8 (A-H,O-Z)
 IMPLICIT INTEGER*4 (I-N)
-DIMENSION MAXA(NPF),LMT(NDF,NET)
+! what NET?, change net to ne, P25.
+    DIMENSION MAXA(NPF), LMT(NDF, NE)
 MAXA=0;NWK=O
 MAXA(I)=1
 DO I=2,NN1

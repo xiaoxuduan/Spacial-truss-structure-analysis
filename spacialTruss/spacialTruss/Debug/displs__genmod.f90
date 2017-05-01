@@ -1,4 +1,4 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Wed Apr 19 17:07:01 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Mon May 01 18:31:29 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE DISPLS__genmod
@@ -16,9 +16,9 @@
               REAL(KIND=8) :: DIST(NPF)
               REAL(KIND=8) :: AE(2,NM)
               INTEGER(KIND=4) :: NAE(NE)
-              REAL(KIND=8) :: X
-              REAL(KIND=8) :: Y
-              REAL(KIND=8) :: Z
+              REAL(KIND=8) :: X(NP)
+              REAL(KIND=8) :: Y(NP)
+              REAL(KIND=8) :: Z(NP)
               REAL(KIND=8) :: PP(NPF)
               REAL(KIND=8) :: FF(NPF)
               REAL(KIND=8) :: SG(NE)

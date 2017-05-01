@@ -1,10 +1,12 @@
-SUBROUTINE DISPLS(NP,NE,NF,NPF,NM,NN,IT,FTOOL,
+SUBROUTINE DISPLS(NP,NE,NF,NPF,NM,NN,IT,FTOOL,&
 & DIST,AE,NAE,X,Y,Z,PP,FF,SG,SM)
         IMPLICIT REAL*8 (A-H,O-Z)
         IMPLICIT INTEGER*4 (I-N)
         DIMENSION IT(NF,NP),DIST(NPF),FTOOL(NPF),T(2,6),&
       & TT(6,2),AE(2,NM),ME(2,NE),NAE(NE),UE(6),U(2), &
       & AKE(2,2),FE1(2),FE(6),FF(NPF),PP(NPF),SG(NE),SM(NE)
+        ! add by xiaoxu
+        DIMENSION X(NP),Y(NP) ,Z(NP)
        SG=0;SM=0;FF=0
        DO I=1,NP
          DO J=1,NF
@@ -24,10 +26,10 @@ SUBROUTINE DISPLS(NP,NE,NF,NPF,NM,NN,IT,FTOOL,
          ENDDO
          CALL FT(IE,NP,NE,X,Y,Z,ME,T)
          CALL FKE(NP,NE,NM,IE,X,Y,Z,ME,NAE,AE,AKE)
-         U=T*UE
-         FE1=AKE*U
+         U=matmul(T,UE)
+         FE1=matmul(AKE,U)
          CALL MAT(2,6,T,TT)
-         FE=TT*FE1
+         FE=matmul(TT,FE1)
          DO J=1,NF
           FF(NF*(N1-1)+J)=FF(NF*(N1-1)+J)+FE(J)
           FF(NF*(N2-1)+J)=FF(NF*(N2-1)+J)+FE(NF+J)
