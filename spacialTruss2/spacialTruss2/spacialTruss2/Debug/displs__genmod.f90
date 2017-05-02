@@ -1,10 +1,10 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Tue May 02 22:01:36 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Wed May 03 00:37:47 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE DISPLS__genmod
           INTERFACE 
             SUBROUTINE DISPLS(NP,NE,NF,NPF,NM,NN,IT,FTOOL,DIST,AE,NAE,X,&
-     &Y,Z,PP,FF,SG,SM)
+     &Y,Z,PP,FF,SG,SM,ME)
               INTEGER(KIND=4) :: NM
               INTEGER(KIND=4) :: NPF
               INTEGER(KIND=4) :: NF
@@ -23,6 +23,7 @@
               REAL(KIND=8) :: FF(NPF)
               REAL(KIND=8) :: SG(NE)
               REAL(KIND=8) :: SM(NE)
+              INTEGER(KIND=4) :: ME(2,NE)
             END SUBROUTINE DISPLS
           END INTERFACE 
         END MODULE DISPLS__genmod

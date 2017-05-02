@@ -18,14 +18,17 @@
                write(4,*) 'before datain'
                CALL DATAIN(NP,NE,NF,ND,NDF,NPF,NM,NR,NCF,
      &   IME,INAE,IIT,ILMT,IMAXA,
-     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK)
+     &   IX,IY,IZ,IRR,IAE,IPF,ICKK)
                
                write(4,*) 'before flmt'
+               write(4,*) 24
+               write(4,*) me
                    ! change RR TO A(IRR+1), Page 41;
                CALL FLMT(NP,NE,NN,NN1,NR,A(IRR+1),ND,NF,NDF,
      &   IA(IME+1),IA(IIT+1),IA(ILMT+1))
                !add ICKK
-        CALL FMAXA(NN1,NE,IA(ILMT+1),IA(IMAXA+1),NWK,NPF,NDF,ICKK)
+        CALL FMAXA(NN1,NE,IA(ILMT+1),IA(IMAXA+1),NWK,NPF,NDF,ICKK,
+     &       IDIST,IFTOOL,IFF,IPP,ISG,ISM)
         
         write(4,*) 'before conkb'
                CALL CONKB(NP,NE,NM,NWK,IA(IME+1),A(IX+1),
@@ -42,9 +45,11 @@
          
          write(4,*) 'before displs'
          write(4,*) idist
+         
+         ! ADD ME=IA(IME+1)
         CALL DISPLS(NP,NE,NF,NPF,NM,NN,IA(IIT+1),A(IFTOOL+1),
      &  A(IDIST+1),A(IAE+1),IA(INAE+1),A(IX+1),A(IY+1),A(IZ+1),
-     &  A(IPP+1),A(IFF+1),A(ISG+1),A(ISM+1))
+     &  A(IPP+1),A(IFF+1),A(ISG+1),A(ISM+1),IA(IME+1))
         ! CALL DATOUT(18 parameters) while only 7 parameters in DATOUT();
         ! SUBROUTINE DATAOUT(NP,NE,NPF,DIST,FF,SG,SM)
         !CALL DATAOUT(NP,NE,NF,NPF,NM,NN,IA(IIT+1),A(IFTOOL+1),&
@@ -56,8 +61,17 @@
      &  A(IFF+1),A(ISG+1),A(ISM+1))
                CALL CLOSEF
                
+               write(4,*) 'DIST'
+               write(4,*) DIST
+               WRITE(4,*) 'FF'
+               write(4,*) FF
+               WRITE(4,*) 'SG'
+               WRITE(4,*) SG
+               WRITE(4,*) 'SM'
+               WRITE(4,*) SM
+               write(*,*) 'the end'
                read(*,*)
-               END
+        END
 
         !C
                SUBROUTINE OPENF(NAME)
@@ -81,12 +95,13 @@
                CLOSE(2)
                CLOSE(3)
                RETURN
-               END
+      END
         !C
-              !add NWK
+              !add NWKA
+              ! CHANGE : move IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK to FMAXA(); since all those rely on NWK defined in FMAXA();
                SUBROUTINE DATAIN(NP,NE,NF,ND,NDF,NPF,NM,NR,NCF,
      &   IME,INAE,IIT,ILMT,IMAXA,
-     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK)
+     &   IX,IY,IZ,IRR,IAE,IPF,ICKK)
                 IMPLICIT REAL*8 (A-H,O-Z)
                 IMPLICIT INTEGER*4 (I-N)
                 COMMON /AT/A(18000000)
@@ -102,10 +117,10 @@
      &   /5X,'Number of restrained joints               RESTRAINTS=',I5
      &   /5X,'Number of concentrative forced joints           NCF=',I5)
         !C--------------FORM POINTER----------------------------------
-                 ! ADD 
-                ! NWK/ 结构总刚度矩阵的大小?=无约束自由度个数的平方？
-                ! below only hold  节点约束类型为固定约束
-                NWK=(NP-NR)*3*(NP-NR)*3
+                ! ! ADD 
+                !! NWK/ 结构总刚度矩阵的大小?=无约束自由度个数的平方？
+                !! below only hold  节点约束类型为固定约束
+                !NWK=(NP-NR)*3*(NP-NR)*3
                 
                 NF=3
                 ND=2
@@ -124,9 +139,10 @@
                 IPF=IAE+2*NM
                 ICKK=IPF+4*NCF
                 
-                write(4,*) ICKK, NWK , IDIST
+               ! CHANGE : move IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK to FMAXA(); since all those rely on NWK defined in FMAXA();
+                !write(4,*) ICKK, NWK , IDIST
                 IDIST=ICKK+NWK
-                write(4,*) ICKK, NWK , IDIST
+                !write(4,*) ICKK, NWK , IDIST
                 
                 IFTOOL=IDIST+NPF
                 IFF=IFTOOL+NPF
@@ -194,7 +210,8 @@
         IMPLICIT REAL*8 (A-H,O-Z)
         IMPLICIT INTEGER*4 (I-N)
         DIMENSION DIST(NPF),FF(NPF),SG(NE),SM(NE)
-                WRITE(2,715)(I,(DIST(6*(I-1)+J),J=1,3),I=1,NP)
+        ! change 6 to 3
+                WRITE(2,715)(I,(DIST(3*(I-1)+J),J=1,3),I=1,NP)
   715   FORMAT(//5X,'SOLVED JOINT DISPLACEMENTS DATA'
      &        /1X,'  JOINT  ',3X,12X,'Dx',12X,'Dy',12X,'Dz'
      &  /(4X,I5,3X,3(2X,E12.6)))
@@ -202,7 +219,8 @@
   716   FORMAT(//5X,'SOLVED ELEMENT INTERNAL FORCE DATA'
      &        /1X,'  ELEMENT ',3X,12X,'Nx',8X,'STRESS'
      &  /(4X,I5,3X,3(2X,E12.6)))
-        WRITE(2,717)(I,(FF(6*(I-1)+J),J=1,3),I=1,NP)
+        !change 6 to 3
+        WRITE(2,717)(I,(FF(3*(I-1)+J),J=1,3),I=1,NP)
  717   FORMAT(//5X,'SOLVED JOINT REACTION DATA'
      &        /1X,'  JOINT  ',3X,12X,'Rx',12X,'Ry',12X,'Rz'
      &  /(4X,I5,3X,3(2X,E12.6)))
@@ -254,7 +272,8 @@
         !C NN1 LMT NPF=NF*NP NDF=ND*NF
 
 
-        SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF,ICKK)
+        SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF,ICKK, 
+     &            IDIST,IFTOOL,IFF,IPP,ISG,ISM)
         !C This program forms the MDE address matrix MAXA of [K]
         IMPLICIT REAL*8 (A-H,O-Z)
         IMPLICIT INTEGER*4 (I-N)
@@ -279,6 +298,15 @@
          MAXA(I)= MAXA(I-1)+IP-IG+1
         ENDDO
         NWK= MAXA(NN1)-1
+        
+          ! CHANGE: move from DATAIN(); since all below rely on NWK which was defined just above here
+               IDIST=ICKK+NWK
+                !write(4,*) ICKK, NWK , IDIST
+                IFTOOL=IDIST+NPF
+                IFF=IFTOOL+NPF
+                IPP=IFF+NPF
+                ISG=IPP+NPF
+                ISM=ISG+NE
         RETURN
         END
         !C
@@ -404,11 +432,13 @@
 500     N=N-1
               ENDDO
               RETURN
-              END
+      END
         !C
         !Ccc
+      
+      ! ADD ME
         SUBROUTINE DISPLS(NP,NE,NF,NPF,NM,NN,IT,FTOOL,
-     & DIST,AE,NAE,X,Y,Z,PP,FF,SG,SM)
+     & DIST,AE,NAE,X,Y,Z,PP,FF,SG,SM,ME)
                 IMPLICIT REAL*8 (A-H,O-Z)
                 IMPLICIT INTEGER*4 (I-N)
                 DIMENSION IT(NF,NP),DIST(NPF),FTOOL(NPF),T(2,6),
@@ -433,6 +463,9 @@
                ENDDO
                DO IE=1,NE
                  N1=ME(1,IE);N2=ME(2,IE)
+                 write(4,*) 449
+                 write(4,*) N1 , N2
+                 write(4,*) me
                  DO J=1,NF
                 UE(J)=DIST(NF*(N1-1)+J)
         UE(NF+J)=DIST(NF*(N2-1)+J)
@@ -455,6 +488,16 @@
                DO I=1,NPF
                   FF(I)=FF(I)-PP(I)
                ENDDO
+               
+                write(4,*) 'DIST'
+               write(4,*) DIST
+               WRITE(4,*) 'FF'
+               write(4,*) FF
+               WRITE(4,*) 'SG'
+               WRITE(4,*) SG
+               WRITE(4,*) 'SM'
+               WRITE(4,*) SM
+               
                RETURN
       END
         !C

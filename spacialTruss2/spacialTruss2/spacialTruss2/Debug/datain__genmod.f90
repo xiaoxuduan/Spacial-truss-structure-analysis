@@ -1,11 +1,10 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Tue May 02 22:01:36 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Wed May 03 00:37:47 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE DATAIN__genmod
           INTERFACE 
             SUBROUTINE DATAIN(NP,NE,NF,ND,NDF,NPF,NM,NR,NCF,IME,INAE,IIT&
-     &,ILMT,IMAXA,IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM&
-     &,NWK)
+     &,ILMT,IMAXA,IX,IY,IZ,IRR,IAE,IPF,ICKK)
               INTEGER(KIND=4) :: NP
               INTEGER(KIND=4) :: NE
               INTEGER(KIND=4) :: NF
@@ -27,13 +26,6 @@
               INTEGER(KIND=4) :: IAE
               INTEGER(KIND=4) :: IPF
               INTEGER(KIND=4) :: ICKK
-              INTEGER(KIND=4) :: IDIST
-              INTEGER(KIND=4) :: IFTOOL
-              INTEGER(KIND=4) :: IFF
-              INTEGER(KIND=4) :: IPP
-              INTEGER(KIND=4) :: ISG
-              INTEGER(KIND=4) :: ISM
-              INTEGER(KIND=4) :: NWK
             END SUBROUTINE DATAIN
           END INTERFACE 
         END MODULE DATAIN__genmod

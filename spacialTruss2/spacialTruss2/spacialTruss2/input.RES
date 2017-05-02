@@ -33,3 +33,24 @@
      CONCENTRATIVE FORCED JOINTS DATA
     JOINT          Fx          Fy          Fz
        1. 0.30000E+02 0.00000E+00 0.00000E+00
+
+
+     SOLVED JOINT DISPLACEMENTS DATA
+   JOINT                 Dx            Dy            Dz
+        1     0.000000E+00  0.000000E+00  0.000000E+00
+        2              NaN           NaN           NaN
+        3     0.000000E+00  0.000000E+00  0.000000E+00
+
+
+     SOLVED ELEMENT INTERNAL FORCE DATA
+   ELEMENT                Nx        STRESS
+        1              NaN           NaN  0.280260E-44
+    *****              NaN  0.420390E-44  0.000000E+00
+        0
+
+
+     SOLVED JOINT REACTION DATA
+   JOINT                 Rx            Ry            Rz
+        1              NaN           NaN           NaN
+        2              NaN           NaN           NaN
+        3              NaN           NaN           NaN
