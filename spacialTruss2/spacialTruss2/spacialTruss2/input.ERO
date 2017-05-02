@@ -1,0 +1,22 @@
+
+
+ Stop-stiffness matrix not positive       definite
+
+nonpositive pivot for equation   1
+
+ pivot =    0.0000000000E+00
+
+
+ Stop-sturm sequence check failed    because of multiplier growth for column    number   2
+
+ Multiplier =                  NaN
+
+
+ Stop-sturm sequence check failed    because of multiplier growth for column    number   3
+
+ Multiplier =                  NaN
+
+
+ Stop-sturm sequence check failed    because of multiplier growth for column    number   3
+
+ Multiplier =                  NaN

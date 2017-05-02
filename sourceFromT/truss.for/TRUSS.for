@@ -7,25 +7,41 @@
                IMPLICIT REAL*8 (A-H,O-Z)
                IMPLICIT INTEGER*4 (I-N)
                CHARACTER NAME*40
+               !change 18000000 to 1800
                COMMON /AT/A(18000000)
+               !change 2000000 to 2000
                COMMON /IAT/IA(2000000)
                A=0;IA=0
                WRITE(*,*)'INPUT FILE NAME?';READ(*,*)NAME;
                CALL OPENF(NAME)
+               
+               write(4,*) 'before datain'
                CALL DATAIN(NP,NE,NF,ND,NDF,NPF,NM,NR,NCF,
      &   IME,INAE,IIT,ILMT,IMAXA,
-     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM)
+     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK)
+               
+               write(4,*) 'before flmt'
                    ! change RR TO A(IRR+1), Page 41;
                CALL FLMT(NP,NE,NN,NN1,NR,A(IRR+1),ND,NF,NDF,
      &   IA(IME+1),IA(IIT+1),IA(ILMT+1))
-        CALL FMAXA(NN1,NE,IA(ILMT+1),IA(IMAXA+1),NWK,NPF,NDF)
+               !add ICKK
+        CALL FMAXA(NN1,NE,IA(ILMT+1),IA(IMAXA+1),NWK,NPF,NDF,ICKK)
+        
+        write(4,*) 'before conkb'
                CALL CONKB(NP,NE,NM,NWK,IA(IME+1),A(IX+1),
      &   A(IY+1),A(IZ+1),A(IAE+1),IA(INAE+1),
      &   IA(ILMT+1),IA(IMAXA+1),A(ICKK+1),NN1)
+               
+               write(4,*) 'before mkforce'
         CALL MKFORCE(NP,NF,NPF,NCF,NN,
      &   IA(IIT+1),A(IPF+1),A(IPP+1),A(IFTOOL+1))
+        write(4,*) 'before ldlt'
          CALL LDLT(A(ICKK+1),IA(IMAXA+1),NN,0,3,NWK,NN1)
+         write(4,*) 'before mkforce'
          CALL RESOLVE(A(ICKK+1),A(IFTOOL+1),IA(IMAXA+1),NN,NWK,NN1)
+         
+         write(4,*) 'before displs'
+         write(4,*) idist
         CALL DISPLS(NP,NE,NF,NPF,NM,NN,IA(IIT+1),A(IFTOOL+1),
      &  A(IDIST+1),A(IAE+1),IA(INAE+1),A(IX+1),A(IY+1),A(IZ+1),
      &  A(IPP+1),A(IFF+1),A(ISG+1),A(ISM+1))
@@ -34,10 +50,13 @@
         !CALL DATAOUT(NP,NE,NF,NPF,NM,NN,IA(IIT+1),A(IFTOOL+1),&
         !&  A(IDIST+1),A(IAE+1),IA(INAE+1),A(IX+1),A(IY+1),A(IZ+1),&
         !&  A(IPP+1),A(IFF+1),A(ISG+1),A(ISM+1))
+        write(4,*) 'before dataout'
         CALL DATAOUT(NP,NE,NPF,
      &  A(IDIST+1),
      &  A(IFF+1),A(ISG+1),A(ISM+1))
                CALL CLOSEF
+               
+               read(*,*)
                END
 
         !C
@@ -64,23 +83,30 @@
                RETURN
                END
         !C
-
+              !add NWK
                SUBROUTINE DATAIN(NP,NE,NF,ND,NDF,NPF,NM,NR,NCF,
      &   IME,INAE,IIT,ILMT,IMAXA,
-     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM)
+     &   IX,IY,IZ,IRR,IAE,IPF,ICKK,IDIST,IFTOOL,IFF,IPP,ISG,ISM,NWK)
                 IMPLICIT REAL*8 (A-H,O-Z)
                 IMPLICIT INTEGER*4 (I-N)
                 COMMON /AT/A(18000000)
                 COMMON /IAT/IA(2000000)
+               
+                write(4,*) ICKK, NWK , IDIST
                 READ(1,*)NP,NE,NM,NR,NCF
                 WRITE(2,701)NP,NE,NM,NR,NCF
-  701   FORMAT(//1X,'###OUTPUT OF ORIGINAL INPUT INFORMATION###'
+  701           FORMAT(//1X,'###OUTPUT OF ORIGINAL INPUT INFORMATION###'
      &  //5X,'Number of joints                             JOINTS=',I5
      &   /5X,'Number of elements                           ELEMENTS=',I5
      &   /5X,'Number of material property groups    PROPERTY TYPES=',I5
      &   /5X,'Number of restrained joints               RESTRAINTS=',I5
      &   /5X,'Number of concentrative forced joints           NCF=',I5)
         !C--------------FORM POINTER----------------------------------
+                 ! ADD 
+                ! NWK/ 结构总刚度矩阵的大小?=无约束自由度个数的平方？
+                ! below only hold  节点约束类型为固定约束
+                NWK=(NP-NR)*3*(NP-NR)*3
+                
                 NF=3
                 ND=2
                 NDF=ND*NF
@@ -97,7 +123,11 @@
         IAE=IRR+2*NR
                 IPF=IAE+2*NM
                 ICKK=IPF+4*NCF
+                
+                write(4,*) ICKK, NWK , IDIST
                 IDIST=ICKK+NWK
+                write(4,*) ICKK, NWK , IDIST
+                
                 IFTOOL=IDIST+NPF
                 IFF=IFTOOL+NPF
                 IPP=IFF+NPF
@@ -132,7 +162,7 @@
   609           FORMAT(/5X,'CONCENTRATIVE FORCED JOINTS DATA'
      &         /2X,'  JOINT',10X,'Fx', 10X,'Fy',10X,'Fz'
      &         /(2X,F7.0,3(1X,E11.5)))
-                !write(2,*) 'flag3'
+                write(4,*) 'flag3'
                 read(*,*)
                 RETURN
         END
@@ -186,6 +216,7 @@
         !C  This program  forms  the  joint&element  numbering  matrix  IT&LMT
           DIMENSION  IT(NF,NP),LMT(NDF,NE),ME(ND,NE),RR(2,NR)
           NN=0;NN1=0;IT=0;LMT=0
+          write(*,*) 'flmt begin'
           N=0
           DO  I=1,NP
            C=0
@@ -217,17 +248,22 @@
         ENDDO
            ENDDO
           ENDDO
+          write(*,*) 'flmt end'
           RETURN
           END
-        !C
-        SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF)
+        !C NN1 LMT NPF=NF*NP NDF=ND*NF
+
+
+        SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF,ICKK)
         !C This program forms the MDE address matrix MAXA of [K]
         IMPLICIT REAL*8 (A-H,O-Z)
         IMPLICIT INTEGER*4 (I-N)
         DIMENSION MAXA(NPF),LMT(NDF,NE)
         MAXA=0;NWK=O
         ! what
-        MAXA(1)=1
+        ! change to ICKK+1
+        !MAXA(1)=1
+        MAXA(1)=ICKK+1
         DO I=2,NN1
          IP=I-1
          IG=IP
@@ -279,6 +315,8 @@
                 IMPLICIT REAL*8(A-H,O-Z)
                 IMPLICIT INTEGER*4 (I-N)
                 DIMENSION A(NWK),MAXA(NNM)
+                
+                write(4,*) 'ldlt begin'
                 IF(NN.EQ.1) RETURN
                 DO 200 N=1,NN
                  KN=MAXA(N)
@@ -309,7 +347,7 @@
             C=A(KK)/A(KI)
             IF(ABS(C).LT.1.0E+07) GOTO 290
             WRITE(IOUT,2010) N,C
-            STOP
+            !STOP
 290      B=B+C*A(KK)
 300      A(KK)=C
             A(KN)=A(KN)-B
@@ -318,15 +356,18 @@
             IF(A(KN).EQ.0.0) A(KN)=-1.0E-16
             GOTO 200
 320      WRITE(IOUT,2000) N,A(KN)
-            STOP
+            !STOP
 200     CONTINUE
-        RETURN
-2000	  FORMAT(//' Stop-stiffness matrix not positive    
+        
+2000    FORMAT(//' Stop-stiffness matrix not positive    
      &   definite',//,'nonpositive pivot for equation',
      &   I4,//,' pivot =',E20.10)
-2010	FORMAT(//,' Stop-sturm sequence check failed 
+2010   FORMAT(//,' Stop-sturm sequence check failed 
      &   because of multiplier growth for column 
      &   number',I4,//,  ' Multiplier = ',E20.8)
+     
+        write(4,*) 'ldlt end'
+        RETURN
               END
         !C
         !C
@@ -374,6 +415,7 @@
      & TT(6,2),AE(2,NM),ME(2,NE),NAE(NE),UE(6),U(2), 
      & AKE(2,2),FE1(2),FE(6),FF(NPF),PP(NPF),SG(NE),SM(NE),
      & X(NP),Y(NP) ,Z(NP)
+                write(4,*) dist
                SG=0;SM=0;FF=0
                DO I=1,NP
                  DO J=1,NF
@@ -381,7 +423,11 @@
                   IF(LAB.EQ.0) THEN
                    DIST(NF*(I-1)+J)=0.0
                   ELSEIF(LAB.GT.0.AND.LAB.LE.NN) THEN
+                      write(4,*) ftool(lab)
+                      write(4,*) 427
                    DIST(NF*(I-1)+J)=FTOOL(LAB)
+                   write(4,*) DIST(NF*(I-1)+J)
+                   write(4,*) 430
                   ENDIF
                  ENDDO
                ENDDO

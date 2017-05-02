@@ -1,9 +1,9 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Tue May 02 18:47:31 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Tue May 02 22:01:36 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE FMAXA__genmod
           INTERFACE 
-            SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF)
+            SUBROUTINE FMAXA(NN1,NE,LMT,MAXA,NWK,NPF,NDF,ICKK)
               INTEGER(KIND=4) :: NDF
               INTEGER(KIND=4) :: NPF
               INTEGER(KIND=4) :: NE
@@ -11,6 +11,7 @@
               INTEGER(KIND=4) :: LMT(NDF,NE)
               INTEGER(KIND=4) :: MAXA(NPF)
               INTEGER(KIND=4) :: NWK
+              INTEGER(KIND=4) :: ICKK
             END SUBROUTINE FMAXA
           END INTERFACE 
         END MODULE FMAXA__genmod

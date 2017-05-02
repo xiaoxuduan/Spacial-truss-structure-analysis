@@ -40,7 +40,6 @@
         ! Below read should be change all!
         ! chaghe to A(start: end), remove I;
         ! ADD I=1;
-        I=1
         READ(1,*)(A(IX+I),A(IY+I),A(IZ+I),I=1,NP)
         WRITE(2,714)(I,A(IX+I),A(IY+I),A(IZ+I),I=1,NT)
   714   FORMAT(//5X,'GENERATED JOINT COORDINATES DATA'&
