@@ -5,7 +5,7 @@ IMPLICIT INTEGER*4 (I-N)
 ! what NET?, change net to ne, P25.
     DIMENSION MAXA(NPF), LMT(NDF, NE)
 MAXA=0;NWK=O
-MAXA(I)=1
+MAXA(1)=1
 DO I=2,NN1
  IP=I-1
  IG=IP

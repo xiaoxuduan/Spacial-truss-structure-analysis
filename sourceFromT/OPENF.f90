@@ -1,9 +1,9 @@
 ! name is the file name input, 
     SUBROUTINE OPENF(NAME)
     ! change 40 to 4
-       CHARACTER NAME*4
+       CHARACTER NAME*40
          NUM=0
-         DO I=1,4
+         DO I=1,40
              !count number of non-empty char in name;
           IF(NAME(I:I).NE.' ')NUM=NUM+1
          ENDDO
