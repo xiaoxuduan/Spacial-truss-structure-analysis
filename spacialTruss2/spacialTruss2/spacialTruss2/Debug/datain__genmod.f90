@@ -1,4 +1,4 @@
-        !COMPILER-GENERATED INTERFACE MODULE: Wed May 03 00:37:47 2017
+        !COMPILER-GENERATED INTERFACE MODULE: Wed May 03 10:53:49 2017
         ! This source file is for reference only and may not completely
         ! represent the generated interface used by the compiler.
         MODULE DATAIN__genmod

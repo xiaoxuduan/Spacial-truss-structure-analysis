@@ -20,6 +20,9 @@
      &   IME,INAE,IIT,ILMT,IMAXA,
      &   IX,IY,IZ,IRR,IAE,IPF,ICKK)
                
+               write(4,*) 'after datain'
+               WRITE(4,*)NP,NE,NM,NR,NCF
+               
                write(4,*) 'before flmt'
                write(4,*) 24
                write(4,*) me
@@ -44,7 +47,10 @@
          CALL RESOLVE(A(ICKK+1),A(IFTOOL+1),IA(IMAXA+1),NN,NWK,NN1)
          
          write(4,*) 'before displs'
+         WRITE(4,*) 'idist'
          write(4,*) idist
+         write(4,*) 'ckk'
+         write(4,*) ckk
          
          ! ADD ME=IA(IME+1)
         CALL DISPLS(NP,NE,NF,NPF,NM,NN,IA(IIT+1),A(IFTOOL+1),
@@ -335,7 +341,10 @@
                    CKK(IJ)=CKK(IJ)+TAK(I,J)
                   ENDIF
   220    CONTINUE
-   10   CONTINUE
+   10         CONTINUE
+              
+              Write(4,*) 343
+              write(4,*) ckk
               RETURN
               END
         !C
