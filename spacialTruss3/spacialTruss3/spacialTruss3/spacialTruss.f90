@@ -31,7 +31,7 @@ CHARACTER Input*20,OUTPUT*20
     subroutine ANALYSE(NF,NP,NE,NM,NR,NCF,ND,NPF,NDF)
     DIMENSION MM(NE),X(NP),Y(NP),Z(NP),ME(ND,NE),IT(NF,NP),RR(ND,NR), NAE(NE),AE(2,NM),PF(4,NCF),LMT(NDF,NE),MAXA(NPF),CKK(1000),V(NPF),DIST(NPF),PP(NPF),FF(NPF),SG(NE),SM(NE)
 	!write(*,*) 13
-    OPEN(3,FILE='test.txt',STATUS='UNKNOWN')
+    !OPEN(3,FILE='test.txt',STATUS='UNKNOWN')
     
     READ(11,*)(X(I),Y(I),Z(I),I=1,NP)
     !write(3,*) x(1),x(2),x(3)
@@ -413,9 +413,9 @@ END
         WRITE(12,650)(INT(RR(1,I)),FL(3*I-2),FL(3*I-1),FL(3*I),I=1,NR)
 600     FORMAT(6X,'The Joint Displacement'/2x,'Joint',6X,'X(mm)',8X,'Y(mm)',6X,'Z(mm)')
 610     FORMAT(1X,I4,2X,1P3E12.2)
-620     FORMAT(//6X,'The Terminal Forces'/2x,'Member', 6X,'FN(N)',6X,'¦Ò(MPa)')
+620     FORMAT(//6X,'The Terminal Forces'/2x,'Member', 6X,'FN(kN)',6X,'¦Ò(MPa)')
 630     FORMAT(3X,I4,2X,F8.2,6X,F8.2)
-640     FORMAT(//6X,'The Bearing Force'/2x,'Joint',8X,'Fx(N)',8X,'Fy(N)',8X,'Fz(N)')
+640     FORMAT(//6X,'The Bearing Force'/2x,'Joint',8X,'Fx(kN)',8X,'Fy(kN)',8X,'Fz(kN)')
 650     FORMAT(2X,I4,2X,3F10.2)  
         
         

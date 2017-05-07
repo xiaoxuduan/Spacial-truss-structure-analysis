@@ -47,13 +47,13 @@
 
 
       The Terminal Forces
-  Member      FN(N)      ¦Ò(MPa)
+  Member      FN(kN)      ¦Ò(MPa)
       1      0.00          0.00
       2  -2236.07         -2.24
       3   2000.00          2.00
 
 
       The Bearing Force
-  Joint        Fx(N)        Fy(N)        Fz(N)
+  Joint        Fx(kN)        Fy(kN)        Fz(kN)
      1    -2000.00      0.00      0.00
      2     2000.00   1000.00      0.00
