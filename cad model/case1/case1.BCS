@@ -1,0 +1,32 @@
+
+ ===========================
+ = multifrontal statistics =
+ ===========================
+
+     number of equations                     =              30
+     no. of nonzeroes in lower triangle of a =              70
+     number of compressed nodes              =               5
+     no. of compressed nonzeroes in l. tri.  =               5
+     amount of workspace currently in use    =            1005
+     max. amt. of workspace used             =         1999993
+     no. of nonzeroes in the factor l        =             363.
+     number of super nodes                   =               2
+     number of compressed subscripts         =              12
+     size of stack storage                   =             300
+     maximum order of a front matrix         =              24
+     maximum size of a front matrix          =             300
+     maximum size of a front trapezoid       =             276
+     no. of floating point ops for factor    =      6.5070D+03
+     no. of floating point ops for solve     =      3.7800D+02
+     negative pivot monitoring activated
+     number of negative pivots encountered   =              0.
+     factorization panel size                =              24
+     factorization update panel size         =              24
+     solution block size                     =               2
+     number of cores used                    =               1
+     time (cpu & wall) for structure input   =        0.000000        0.000047
+     time (cpu & wall) for ordering          =        0.000000        0.000004
+     time (cpu & wall) for symbolic factor   =        0.000000        0.000005
+     time (cpu & wall) for value input       =        0.000000        0.000025
+
+     no input or output performed

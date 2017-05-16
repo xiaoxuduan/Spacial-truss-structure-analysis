@@ -1,0 +1,12 @@
+ *****************************************
+ *    Program for Analysis of Space Trusses    *
+ *      School of Civil Engineering CSU      *
+ *      2017.5.6 Designed By Duan Xiaoxu       *
+ *****************************************
+  
+ *****************************************
+ *************The Input Data****************
+ *****************************************
+      The General Information
+  NF     NP     NE     NM     NR     NCF     ND
+   3      3      3      1      2      1      2

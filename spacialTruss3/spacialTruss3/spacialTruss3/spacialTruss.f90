@@ -30,10 +30,11 @@ CHARACTER Input*20,OUTPUT*20
     ! AE()? CHANGE FROM AE(1,2) TO AE(2,NM)
     subroutine ANALYSE(NF,NP,NE,NM,NR,NCF,ND,NPF,NDF)
     DIMENSION MM(NE),X(NP),Y(NP),Z(NP),ME(ND,NE),IT(NF,NP),RR(ND,NR), NAE(NE),AE(2,NM),PF(4,NCF),LMT(NDF,NE),MAXA(NPF),CKK(1000),V(NPF),DIST(NPF),PP(NPF),FF(NPF),SG(NE),SM(NE)
-	!write(*,*) 13
-    !OPEN(3,FILE='test.txt',STATUS='UNKNOWN')
+	write(*,*) 13
+    OPEN(3,FILE='test.txt',STATUS='UNKNOWN')
     
     READ(11,*)(X(I),Y(I),Z(I),I=1,NP)
+	write(*,*) 37
     !write(3,*) x(1),x(2),x(3)
     !write(3,*)
     !write(3,*) y
@@ -45,6 +46,7 @@ CHARACTER Input*20,OUTPUT*20
     !write(3,*) me
     !write(3,*)
     READ(11,*)(NAE(I),I=1,NE)
+	write(*,*) 49
     !write(3,*) nae
     !write(3,*)
 	READ(11,*)((RR(I,J),J=1,NR),I=1,2)
@@ -53,12 +55,13 @@ CHARACTER Input*20,OUTPUT*20
 	READ(11,*)((AE(I,J),J=1,NM),I=1,2)
     !write(3,*) ae
     !write(3,*)
-    !write(*,*) 41
+    write(*,*) 58
     	!IF(NCF/=0)THEN
 	READ(11,*)((PF(I,J),J=1,NCF),I=1,4)
     !    write(3,*) pf
     !write(3,*)
-    !write(*,*) 40
+	write(3,*) pf
+    write(*,*) 40
 	WRITE(12,160)
 	WRITE(12,161)(int(PF(1,J)),PF(2,J),PF(3,J),PF(4,J),J=1,NCF)
     
@@ -72,15 +75,15 @@ CHARACTER Input*20,OUTPUT*20
 	WRITE(12,*)((AE(I,J),J=1,NM),I=1,2)
 
 	!ENDIF
-120    FORMAT(/6X,'The Information of Joints'/2x,'Joint',5X,'X',5X,'Y',5X,'Z')
+120    FORMAT(/6X,'The Information of Joints'/2x,'Joint',5X,'X(mm)',5X,'Y(mm)',5X,'Z(mm)')
 121    FORMAT(1X,I4,3F8.1)
 130    FORMAT(/6X,'The Information of Members'/2x,'Member',2X,'START',4X,'END',6X,'NAE')
 131    FORMAT(I4,3I8)
 140    FORMAT(/6X,'The Information of SUPPORTS'/2x,'Joint',5X,'S')
 141    FORMAT(1X,I4,F8.3)
-150    FORMAT(/6X,'The Information of Sections'/4x,'E0',8X,'A0')
+150    FORMAT(/6X,'The Information of Sections'/4x,'E0(MPa)',8X,'A0(mm^2)')
 !151    FORMAT(1X,1PE8.2,F8.4)
-160    FORMAT(/6X,'The Loading at Joints'/2x,'Joint',5X,'FX',5X,'FY',7X,'FZ')
+160    FORMAT(/6X,'The Loading at Joints'/2x,'Joint',5X,'Fx(N)',5X,'Fy(N)',7X,'Fz(N)')
 161    FORMAT(1X,i4,3F8.2)
 	CALL FLMT(NP,NE,NN,NNM,NR,RR,ND,NF,NDF,ME,IT,LMT)
 	CALL FMAXA(NNM,NE,LMT,MAXA,NWK,NPF,NDF)
@@ -405,17 +408,21 @@ END
         WRITE(12,*)'*********The Results of Calculation**********'
         WRITE(12,*)'****************************************'	      
 	 WRITE(12,600)
-    WRITE(12,610)(I,DIST(3*I-2)*1000,DIST(3*I-1)*1000,&
-    DIST(3*I)*1000, I=1,NP)
+    WRITE(12,610)(I,DIST(3*I-2),DIST(3*I-1),&
+    DIST(3*I), I=1,NP)
         WRITE(12,620)
-        WRITE(12,630)(IE,SG(IE),SM(IE)/1000,IE=1,NE)
+        WRITE(12,630)(IE,SG(IE),SM(IE),IE=1,NE)
+		write(3,*) 'sg'
+		write(3,*) sg
+		write(3,*) 'sm'
+		write(3,*) sm
         WRITE(12,640)
         WRITE(12,650)(INT(RR(1,I)),FL(3*I-2),FL(3*I-1),FL(3*I),I=1,NR)
 600     FORMAT(6X,'The Joint Displacement'/2x,'Joint',6X,'X(mm)',8X,'Y(mm)',6X,'Z(mm)')
 610     FORMAT(1X,I4,2X,1P3E12.2)
-620     FORMAT(//6X,'The Terminal Forces'/2x,'Member', 6X,'FN(kN)',6X,'¦Ò(MPa)')
+620     FORMAT(//6X,'The Terminal Forces'/2x,'Member', 6X,'FN(N)',6X,'¦Ò(MPa)')
 630     FORMAT(3X,I4,2X,F8.2,6X,F8.2)
-640     FORMAT(//6X,'The Bearing Force'/2x,'Joint',8X,'Fx(kN)',8X,'Fy(kN)',8X,'Fz(kN)')
+640     FORMAT(//6X,'The Bearing Force'/2x,'Joint',8X,'Fx(N)',8X,'Fy(N)',8X,'Fz(N)')
 650     FORMAT(2X,I4,2X,3F10.2)  
         
         
